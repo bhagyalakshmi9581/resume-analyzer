@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer</title>
+</head>
+<body>
+
+<h1>AI Resume Analyzer</h1>
+
+<form method="POST">
+
+    <h3>Resume</h3>
+
+    <textarea
+        name="resume"
+        rows="10"
+        cols="80"></textarea>
+
+    <h3>Job Description</h3>
+
+    <textarea
+        name="job"
+        rows="10"
+        cols="80"></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Analyze
+    </button>
+
+</form>
+
+{% if result %}
+<h2>Match Score: {{ result.score }}%</h2>
+
+<h3>Missing Skills</h3>
+
+<ul>
+{% for skill in result.missing_skills %}
+<li>{{ skill }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+</body>
+</html>
