@@ -34,13 +34,22 @@
 {% if result %}
 <h2>Match Score: {{ result.score }}%</h2>
 
-<h3>Missing Skills</h3>
+<h3>
+    Missing Skills
+    <span aria-label="{{ result.missing_skills|length }} missing skills">
+        ({{ result.missing_skills|length }})
+    </span>
+</h3>
 
+{% if result.missing_skills %}
 <ul>
 {% for skill in result.missing_skills %}
 <li>{{ skill }}</li>
 {% endfor %}
 </ul>
+{% else %}
+<p role="status">No missing skills identified.</p>
+{% endif %}
 {% endif %}
 
 </body>

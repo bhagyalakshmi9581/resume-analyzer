@@ -1,28 +1,18 @@
-# Create a function that compares resume text with job description and returns score and missing skills
+"""Utilities for comparing resumes with job descriptions."""
 
-def analyze_resume(resume_text, job_description):
+
+def analyze_resume(resume_text: str, job_description: str) -> dict:
+    """Compare resume words with job-description words and return a match report."""
     job_words = set(job_description.lower().split())
     resume_words = set(resume_text.lower().split())
 
     matched = job_words.intersection(resume_words)
-
-    score = 0
-
-    if job_words:
-        score = round((len(matched) / len(job_words)) * 100)
+    missing = sorted(job_words - resume_words)
+    score = round((len(matched) / len(job_words)) * 100) if job_words else 0
 
     return {
         "score": score,
-        "missing_skills": list(job_words - resume_words)
+        "matched_skills": sorted(matched),
+        "missing_skills": missing,
+        "suggestions": [f"Consider adding {skill}" for skill in missing[:5]],
     }
-# Enhance the resume analyzer to identify skills, calculate match percentage,
-# and provide improvement suggestions.
-return {
-    "score": score,
-    "matched_skills": list(matched),
-    "missing_skills": list(job_words - resume_words),
-    "suggestions": [
-        f"Consider adding {skill}"
-        for skill in list(job_words - resume_words)[:5]
-    ]
-}
