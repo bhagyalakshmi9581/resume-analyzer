@@ -15,3 +15,14 @@ def analyze_resume(resume_text, job_description):
         "score": score,
         "missing_skills": list(job_words - resume_words)
     }
+# Enhance the resume analyzer to identify skills, calculate match percentage,
+# and provide improvement suggestions.
+return {
+    "score": score,
+    "matched_skills": list(matched),
+    "missing_skills": list(job_words - resume_words),
+    "suggestions": [
+        f"Consider adding {skill}"
+        for skill in list(job_words - resume_words)[:5]
+    ]
+}
