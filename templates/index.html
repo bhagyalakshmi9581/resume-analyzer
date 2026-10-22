@@ -7,10 +7,18 @@
 
 <h1>AI Resume Analyzer</h1>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
     <h3>Resume</h3>
 
+    <label for="resume_file">Upload a PDF or Word (.docx) resume</label>
+    <input
+        type="file"
+        id="resume_file"
+        name="resume_file"
+        accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+
+    <p>Or paste resume text:</p>
     <textarea
         name="resume"
         rows="10"
@@ -30,6 +38,10 @@
     </button>
 
 </form>
+
+{% if error %}
+<p role="alert">{{ error }}</p>
+{% endif %}
 
 {% if result %}
 <h2>Match Score: {{ result.score }}%</h2>
